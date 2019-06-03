@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="grid">
-      <div @click="activate(0,0)" :class="{ off: !isOn, on: isOn }"></div>
+      <!-- <div @click="activate(0,0)" :class="{ off: !gridOn, on: gridOn }"></div>
       <div @click="activate()"></div>
       <div @click="activate()"></div>
 
@@ -12,20 +12,28 @@
       <div @click="activate()"></div>
       <div @click="activate()"></div>
       <div @click="activate()"></div>
+      <p>{{ gameWon }}</p> -->
+      <div v-for="row in board" :key="row.id">
+          <div v-for="col in row" :key="col.id">
+
+          </div>
+
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "app",
   data() {
-    return {
-      board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-    };
+    return {};
   },
   methods: {
-    activate(x,y) {
+    activate(x, y) {
       // this.board[x][y] = this.board[x][y] === 1 ? 0 : 1;
       this.isOn = this.board[0][0] == 1 ? true : false;
       // console.log('off ', this.board[0][0] === 0);
@@ -33,9 +41,16 @@ export default {
     }
   },
   computed: {
-    isOn() {
-      return this.board[0][0] === 1;
+    ...mapGetters(["gameWon"]),
+    gridOn() {
+      console.log(this.$store.getters.isOn({ x: 0, y: 0 }));
+    },
+    board() {
+      this.$store.getters.createBoard;
     }
+  },
+  created() {
+
   }
 };
 </script>
@@ -51,21 +66,21 @@ export default {
   display: flex;
   justify-content: center;
 
-  .grid {
-    display: grid;
-    grid-template-rows: 100px 100px 100px;
-    grid-template-columns: 100px 100px 100px;
+  // .grid {
+  //   display: grid;
+  //   grid-template-rows: 100px 100px 100px;
+  //   grid-template-columns: 100px 100px 100px;
 
-    div {
-      border: 1px solid;
+  //   div {
+  //     border: 1px solid;
 
-      &.off {
-        background-color: green;
-      }
-      &.on {
-        background-color: #27f527;
-      }
-    }
-  }
+  //     &.off {
+  //       background-color: green;
+  //     }
+  //     &.on {
+  //       background-color: #27f527;
+  //     }
+  //   }
+  // }
 }
 </style>
