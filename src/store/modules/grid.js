@@ -1,12 +1,14 @@
+import board from '../../data/board';
+
 const state = {
-  board: [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
-  ]
+  board: []
 };
 
 const mutations = {
+  'SET_BOARD'(state, board){
+    state.board = board;
+  },
+
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
     state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
@@ -15,7 +17,9 @@ const mutations = {
 
 const actions = {
   // create grid first
-
+  initBoard({commit}){
+    commit('SET_BOARD', board);
+  },
   // change light setting for grid and its associate grids
   activate({commit}, payload){
     commit('ACTIVATE', payload);
