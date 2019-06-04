@@ -24,6 +24,7 @@ const actions = {
   activate({commit}, payload){
     commit('ACTIVATE', payload);
   }
+
 };
 
 const getters = {
@@ -48,8 +49,8 @@ const getters = {
     });
   },
   isOn: (state) => ({row, col}) => {
-    // console.log(row, col, state.board[row][col])
-    // return state.board[row][col] == 1;
+    console.log('isOn ', row, col)
+    return state.board[row][col] == 1;
   }
 };
 

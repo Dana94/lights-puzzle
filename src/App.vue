@@ -2,34 +2,45 @@
   <div id="app">
     <div class="grid">
       <div v-for="(row, x) in board" :key="row.id" class="row">
-        <div v-for="(col, y) in board" :key="col.id" class="col" @click="activate(x,y)"></div>
+        <div
+          v-for="(col, y) in board"
+          :key="col.id"
+          class="col"
+          @click="activate(x,y)"
+          :class="{off: !gridOn, on: gridOn}"
+        ></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "app",
   data() {
-    return {};
+    return {
+      x: "",
+      y: ""
+    };
   },
   methods: {
     activate(x, y) {
-      // this.board[x][y] = this.board[x][y] === 1 ? 0 : 1;
-      //this.isOn = this.board[0][0] == 1 ? true : false;
-      // console.log('off ', this.board[0][0] === 0);
-      // console.log('on ', this.board[0][0] === 1);
-      console.log(x,y);
+      this.x = x;
+      this.y = y;
     }
   },
   computed: {
     // ...mapGetters(["gameWon"]),
-    // gridOn() {
-    //   console.log(this.$store.getters.isOn({ x: 0, y: 0 }));
-    // },
+    gridOn() {
+      console.log("gridon", "x: ", this.x, "y:", this.y);
+      if (this.x || this.y) {
+        return this.$store.getters.isOn({ row: this.x, col: this.y });
+      } else {
+        return false;
+      }
+    },
     board() {
       return this.$store.getters.createBoard;
     }
@@ -60,14 +71,14 @@ export default {
 
       div.col {
         border: 1px solid;
-      }
 
-      // &.off {
-      //   background-color: green;
-      // }
-      // &.on {
-      //   background-color: #27f527;
-      // }
+        &.off {
+          background-color: green;
+        }
+        &.on {
+          background-color: #27f527;
+        }
+      }
     }
   }
 }
