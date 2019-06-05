@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="grid">
+    <!-- <div class="grid">
       <div v-for="(row, row_x) in board" :key="row_x.id" class="row">
         <div
           v-for="(col, col_y) in board"
@@ -10,11 +10,13 @@
           :class="{off: !gridOn && row_x != x && col_y != y, on: gridOn && row_x == x && col_y == y}"
         ></div>
       </div>
-    </div>
+    </div> -->
+    <board></board>
   </div>
 </template>
 
 <script>
+import Board from './components/Board.vue'
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -48,6 +50,9 @@ export default {
   },
   created() {
     this.$store.dispatch("initBoard");
+  },
+  components: {
+    Board
   }
 };
 </script>
@@ -63,24 +68,6 @@ export default {
   display: flex;
   justify-content: center;
 
-  .grid {
-    div.row {
-      border: 1px solid;
-      display: grid;
-      grid-template-rows: 100px;
-      grid-template-columns: 100px 100px 100px;
 
-      div.col {
-        border: 1px solid;
-
-        &.off {
-          background-color: green;
-        }
-        &.on {
-          background-color: #27f527;
-        }
-      }
-    }
-  }
 }
 </style>
