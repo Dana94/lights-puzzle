@@ -1,23 +1,12 @@
 <template>
   <div id="app">
-    <!-- <div class="grid">
-      <div v-for="(row, row_x) in board" :key="row_x.id" class="row">
-        <div
-          v-for="(col, col_y) in board"
-          :key="col_y.id"
-          class="col"
-          @click="activate(row_x,col_y)"
-          :class="{off: !gridOn && row_x != x && col_y != y, on: gridOn && row_x == x && col_y == y}"
-        ></div>
-      </div>
-    </div> -->
     <board></board>
   </div>
 </template>
 
 <script>
 import Board from './components/Board.vue'
-import { mapGetters, mapActions } from "vuex";
+
 
 export default {
   name: "app",
@@ -43,9 +32,6 @@ export default {
       } else {
         return false;
       }
-    },
-    board() {
-      return this.$store.getters.createBoard;
     }
   },
   created() {
