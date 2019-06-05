@@ -1,13 +1,13 @@
 <template>
   <div class="row">
-    <column v-for="col in row" :key="col.id" column="col"></column>
+    <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x"></column>
   </div>
 </template>
 
 <script>
 import Column from "./Column.vue";
 export default {
-  props: ["row"],
+  props: ["row", "index_x"],
   components: {
     Column
   }

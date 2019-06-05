@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <row v-for="row in board" :key="row.id" row="row"></row>
+    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x"></row>
   </div>
 </template>
 
@@ -20,8 +20,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.board {
-   
-  }
+
 </style>
 
