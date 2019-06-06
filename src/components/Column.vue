@@ -1,15 +1,10 @@
 <template>
-  <div
-    class="column"
-    :class="{on: active, off: !active}"
-    @click="changeStatus"
-  >
-  </div>
+  <div class="column" :class="{on: active, off: !active}" @click="changeStatus"></div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import {eventBus} from '../main';
+import { eventBus } from "../main";
 
 export default {
   props: ["index_y", "index_x"],
@@ -23,7 +18,7 @@ export default {
   methods: {
     changeStatus() {
       this.check = !this.check;
-      eventBus.$emit('clicked', {row: this.index_x, col: this.index_y});
+      eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y
@@ -40,35 +35,22 @@ export default {
     }
   },
   created() {
-    eventBus.$on('clicked', coordinates => {
+    eventBus.$on("clicked", coordinates => {
       this.check = !this.check;
-      if(coordinates.row-1 == this.index_x && coordinates.col == this.index_y){
+      if (
+        (coordinates.row - 1 == this.index_x &&
+          coordinates.col == this.index_y) ||
+        (coordinates.row + 1 == this.index_x &&
+          coordinates.col == this.index_y) ||
+        (coordinates.row == this.index_x &&
+          coordinates.col - 1 == this.index_y) ||
+        (coordinates.row == this.index_x && coordinates.col + 1 == this.index_y)
+      ) {
         this.$store.dispatch("activate", {
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      });
-      }
-      else if(coordinates.row+1 == this.index_x && coordinates.col == this.index_y){
-        this.$store.dispatch("activate", {
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      });
-      }
-      else if(coordinates.row == this.index_x && coordinates.col-1 == this.index_y){
-        this.$store.dispatch("activate", {
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      });
-      }
-       else if(coordinates.row == this.index_x && coordinates.col+1 == this.index_y){
-        this.$store.dispatch("activate", {
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      });
+          row: this.index_x,
+          col: this.index_y,
+          check: this.check
+        });
       }
     });
   }
