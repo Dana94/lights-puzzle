@@ -49,7 +49,6 @@ const getters = {
     });
   },
   isOn: (state) => ({row, col}) => {
-    console.log('isOn ', row, col)
     return state.board[row][col] == 1;
   }
 };
