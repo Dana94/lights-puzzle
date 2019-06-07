@@ -51,6 +51,7 @@ export default {
           col: this.index_y,
           check: this.check
         });
+        eventBus.$emit("checkBoard");
       }
     });
   }

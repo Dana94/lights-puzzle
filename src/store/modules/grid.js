@@ -32,21 +32,17 @@ const getters = {
     return state.board;
   },
   // check if won
-  gameWon(state) {
+  gameWon: (state) => ({check}) => {
     let won = true;
     state.board.forEach(row => {
-      console.log(row)
       row.forEach(col => {
         if(col == 0){
           won = false;
-          return;
+          return won;
         }
-        console.log(col)
       })
-      if(!won) {
-        return;
-      }
     });
+    return won;
   },
   isOn: (state) => ({row, col}) => {
     return state.board[row][col] == 1;
