@@ -19,5 +19,7 @@ export default {
   display: grid;
   grid-template-rows: 100px;
   grid-template-columns: 100px 100px 100px;
+  margin-bottom: 10px;
+  grid-gap: 10px;
 }
 </style>
