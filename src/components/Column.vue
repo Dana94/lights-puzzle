@@ -60,12 +60,12 @@ export default {
 
 <style lang="scss" scoped>
 .column {
-  border: 1px solid;
+  border-radius: 25px;
   &.on {
-    background-color: greenyellow;
+    background-color: #55dd55;
   }
   &.off {
-    background-color: green;
+    background-color: #115511;
   }
 }
 </style>
