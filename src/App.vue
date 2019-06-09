@@ -8,9 +8,7 @@
       </v-layout>
       <v-layout row wrap>
         <div class="stats">
-        <div class="">
-          Moves: {{moves}}
-        </div>
+          <div class>Moves: {{moves}}</div>
           <v-btn class="reset" @click="reset">Reset</v-btn>
         </div>
       </v-layout>
