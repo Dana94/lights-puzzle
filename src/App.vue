@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <board></board>
+    <v-container>
+      <v-layout align-center column>
+        <v-flex xs12>
+          <board></board>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
+        <div class="stats">
+          <v-btn class="reset">Reset</v-btn>
+        </div>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
 <script>
-import Board from './components/Board.vue'
-
+import Board from "./components/Board.vue";
 
 export default {
   name: "app",
@@ -27,7 +37,11 @@ export default {
     gridOn() {
       console.log("gridon", "x: ", this.x, "y:", this.y);
       if (this.x || this.y) {
-        console.log(this.x, this.y, this.$store.getters.isOn({ row: this.x, col: this.y }))
+        console.log(
+          this.x,
+          this.y,
+          this.$store.getters.isOn({ row: this.x, col: this.y })
+        );
         return this.$store.getters.isOn({ row: this.x, col: this.y });
       } else {
         return false;
@@ -44,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/base.scss';
+@import "./assets/base.scss";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -56,6 +70,16 @@ export default {
   display: flex;
   justify-content: center;
 
+  .stats {
+    width: 320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
 
+    .reset {
+      background-color: #551155;
+      color: white;
+    }
+  }
 }
 </style>
