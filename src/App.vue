@@ -8,6 +8,7 @@
       </v-layout>
       <v-layout row wrap>
         <div class="stats">
+          <div class>Moves: {{moves}}</div>
           <v-btn class="reset" @click="reset">Reset</v-btn>
         </div>
       </v-layout>
@@ -49,6 +50,9 @@ export default {
       } else {
         return false;
       }
+    },
+    moves() {
+      return this.$store.getters.moves;
     }
   },
   created() {
@@ -77,7 +81,7 @@ export default {
     width: 320px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     .reset {
       background-color: #551155;

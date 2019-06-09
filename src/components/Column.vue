@@ -5,6 +5,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { eventBus } from "../main";
+import store from '../store/store';
 
 export default {
   props: ["index_y", "index_x"],
@@ -19,6 +20,7 @@ export default {
     changeStatus() {
       this.check = !this.check;
       eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
+      this.$store.dispatch("increaseCount");
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y
