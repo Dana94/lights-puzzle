@@ -12,6 +12,9 @@ const mutations = {
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
     state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
+  },
+  'RESET'(state){
+    state.board = state.board.map(x => x.map(y => y * 0));
   }
 };
 
@@ -23,6 +26,9 @@ const actions = {
   // change light setting for grid and its associate grids
   activate({commit}, payload){
     commit('ACTIVATE', payload);
+  },
+  reset({commit}) {
+    commit('RESET');
   }
 
 };
