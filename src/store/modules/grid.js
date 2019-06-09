@@ -1,7 +1,8 @@
 import board from '../../data/board';
 
 const state = {
-  board: []
+  board: [],
+  moves: 0
 };
 
 const mutations = {
@@ -15,6 +16,10 @@ const mutations = {
   },
   'RESET'(state){
     state.board = state.board.map(x => x.map(y => y * 0));
+    state.moves = 0;
+  },
+  'INCREASE_COUNT'(state){
+    state.moves += 1;
   }
 };
 
@@ -29,6 +34,9 @@ const actions = {
   },
   reset({commit}) {
     commit('RESET');
+  },
+  increaseCount({commit}){
+    commit('INCREASE_COUNT');
   }
 
 };
@@ -36,6 +44,9 @@ const actions = {
 const getters = {
   createBoard(state) {
     return state.board;
+  },
+  moves(state) {
+    return state.moves;
   },
   // check if won
   gameWon: (state) => ({check}) => {
