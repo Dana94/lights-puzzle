@@ -8,7 +8,7 @@
       </v-layout>
       <v-layout row wrap>
         <div class="stats">
-          <v-btn class="reset">Reset</v-btn>
+          <v-btn class="reset" @click="reset">Reset</v-btn>
         </div>
       </v-layout>
     </v-container>
@@ -30,6 +30,9 @@ export default {
     activate(row_x, col_y) {
       this.x = row_x;
       this.y = col_y;
+    },
+    reset() {
+      this.$store.dispatch("reset");
     }
   },
   computed: {
