@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x"></row>
-    <p :class="{show: won}">You won!</p>
+    {{won}}
   </div>
 </template>
 
@@ -21,9 +21,12 @@ export default {
       return this.$store.getters.createBoard;
     },
     won() {
-      return this.$store.getters.gameWon({
-        check: this.check
-      });
+      if (this.$store.getters.gameWon({ check: this.check })) {
+        setTimeout(() => {
+          alert("You won! Woohoo!");
+          this.$store.dispatch("reset");
+        }, 500);
+      }
     }
   },
   components: {
