@@ -5,15 +5,15 @@
     :class="{on: active, off: !active}"
     @keydown.enter="changeStatus"
     @click="changeStatus"
-    tabindex="0"
     @keydown.up="focusUp"
-    v-focus="focused"></div>
+    v-focus="focused"
+  ></div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { eventBus } from "../main";
-import store from '../store/store';
+import store from "../store/store";
 
 export default {
   props: ["index_y", "index_x"],
@@ -21,7 +21,8 @@ export default {
     return {
       // Change value whenever a square is clicked to endure the computed property will run
       // to check if it's active
-      check: false
+      check: false,
+      focused: false
     };
   },
   methods: {
@@ -35,6 +36,7 @@ export default {
       });
     },
     focusUp() {
+      this.check = !this.check;
       this.$store.dispatch("focusUp", {
         row: this.index_x,
         col: this.index_y
@@ -49,17 +51,12 @@ export default {
         check: this.check
       });
     },
-    focused(){
-      // return this.$store.getters.isInFocus({
-      //   row: this.index_x,
-      //   col: this.index_y,
-      //   check: this.check
-      // })
-      console.log(this.index_x, this.index_y, this.$store.getters.isInFocus({
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      }))
+    focusOn() {
+      this.focused = this.$store.getters.isInFocus({
+          row: this.index_x,
+          col: this.index_y,
+          check: this.check
+        });
     }
   },
   created() {
@@ -94,9 +91,6 @@ export default {
   }
   &.off {
     background-color: #115511;
-  }
-  &:focus {
-    border: 9px solid;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './App.vue'
-import { focus } from 'vue-focus';
+// import { focus } from 'vue-focus';
 
 import store from './store/store';
 
@@ -20,6 +20,6 @@ export const eventBus = new Vue();
 new Vue({
   el: '#app',
   store,
-  directives: { focus: focus },
+  //directives: { focus: focus },
   render: h => h(App)
 })

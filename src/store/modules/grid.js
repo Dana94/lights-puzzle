@@ -75,6 +75,7 @@ const getters = {
     return state.board[row][col] == 1;
   },
   isInFocus: (state) => ({row, col}) => {
+    console.log(state.focus_x, state.focus_y, '    ', row, col, state.focus_x == row && state.focus_y == col);
     return state.focus_x == row && state.focus_y == col;
   },
 };
