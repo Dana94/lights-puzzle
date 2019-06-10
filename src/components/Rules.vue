@@ -1,0 +1,29 @@
+<template>
+   <v-expansion-panel>
+    <v-expansion-panel-content>
+      <template v-slot:header>
+        <div>Rules</div>
+      </template>
+      <v-card>
+        <v-card-text>
+          Get all the squares to light up!
+          Clicking on one square will change its status as well as any square sharing a side with that square.
+          Good luck :)
+        </v-card-text>
+      </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped>
+.v-expansion-panel__container {
+  width: 320px;
+  line-height: 1.5rem;
+}
+</style>
