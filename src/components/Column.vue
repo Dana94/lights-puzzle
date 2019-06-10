@@ -1,5 +1,13 @@
 <template>
-  <div class="column" :class="{on: active, off: !active}" @click="changeStatus"></div>
+  <div
+    class="column"
+    :id="'grid-'+index_x+'-'+index_y"
+    :class="{on: active, off: !active}"
+    @keydown.enter="changeStatus"
+    @click="changeStatus"
+    tabindex="0"
+    @keydown.up="focusUp"
+    v-focus="focused"></div>
 </template>
 
 <script>
@@ -25,6 +33,12 @@ export default {
         row: this.index_x,
         col: this.index_y
       });
+    },
+    focusUp() {
+      this.$store.dispatch("focusUp", {
+        row: this.index_x,
+        col: this.index_y
+      });
     }
   },
   computed: {
@@ -34,6 +48,18 @@ export default {
         col: this.index_y,
         check: this.check
       });
+    },
+    focused(){
+      // return this.$store.getters.isInFocus({
+      //   row: this.index_x,
+      //   col: this.index_y,
+      //   check: this.check
+      // })
+      console.log(this.index_x, this.index_y, this.$store.getters.isInFocus({
+        row: this.index_x,
+        col: this.index_y,
+        check: this.check
+      }))
     }
   },
   created() {
@@ -68,6 +94,9 @@ export default {
   }
   &.off {
     background-color: #115511;
+  }
+  &:focus {
+    border: 9px solid;
   }
 }
 </style>

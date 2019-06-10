@@ -2,7 +2,9 @@ import board from '../../data/board';
 
 const state = {
   board: [],
-  moves: 0
+  moves: 0,
+  focus_x: 0,
+  focus_y: 0
 };
 
 const mutations = {
@@ -20,7 +22,12 @@ const mutations = {
   },
   'INCREASE_COUNT'(state){
     state.moves += 1;
+  },
+  'FOCUS_UP'(state, {row, col}){
+    state.focus_x = row - 1 < 0 ? 2 : row - 1;
+    console.log(row, col, '\n', state.focus_x, state.focus_y);
   }
+
 };
 
 const actions = {
@@ -37,6 +44,9 @@ const actions = {
   },
   increaseCount({commit}){
     commit('INCREASE_COUNT');
+  },
+  focusUp({commit}, payload){
+    commit('FOCUS_UP', payload);
   }
 
 };
@@ -63,7 +73,10 @@ const getters = {
   },
   isOn: (state) => ({row, col}) => {
     return state.board[row][col] == 1;
-  }
+  },
+  isInFocus: (state) => ({row, col}) => {
+    return state.focus_x == row && state.focus_y == col;
+  },
 };
 
 export default {
