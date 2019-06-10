@@ -3,6 +3,11 @@
     <v-container>
       <v-layout align-center column>
         <v-flex xs12>
+          <rules></rules>
+        </v-flex>
+      </v-layout>
+      <v-layout align-center column>
+        <v-flex xs12>
           <board></board>
         </v-flex>
       </v-layout>
@@ -18,6 +23,7 @@
 
 <script>
 import Board from "./components/Board.vue";
+import Rules from "./components/Rules.vue";
 
 export default {
   name: "app",
@@ -59,7 +65,8 @@ export default {
     this.$store.dispatch("initBoard");
   },
   components: {
-    Board
+    Board,
+    Rules
   }
 };
 </script>
