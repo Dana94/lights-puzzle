@@ -43,7 +43,6 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters(["gameWon"]),
     gridOn() {
       console.log("gridon", "x: ", this.x, "y:", this.y);
       if (this.x || this.y) {
