@@ -1,6 +1,9 @@
 <template>
-   <v-expansion-panel>
+  <v-expansion-panel>
     <v-expansion-panel-content>
+      <template v-slot:actions>
+        <v-icon></v-icon>
+      </template>
       <template v-slot:header>
         <div>Rules</div>
       </template>
@@ -16,14 +19,16 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .v-expansion-panel__container {
   width: 320px;
   line-height: 1.5rem;
+}
+
+.v-expansion-panel {
+  margin-bottom: 1.5rem;
 }
 </style>
