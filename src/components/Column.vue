@@ -28,8 +28,11 @@ export default {
   methods: {
     changeStatus() {
       this.check = !this.check;
+
       eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
+
       this.$store.dispatch("increaseCount");
+      
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y
