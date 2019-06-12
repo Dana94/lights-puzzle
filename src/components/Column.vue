@@ -1,19 +1,25 @@
 <template>
-  <div class="column" :class="{on: active, off: !active}" @click="changeStatus"></div>
+  <div
+    class="column"
+    :class="{on: active, off: !active}"
+    @keydown.enter="changeStatus"
+    @click="changeStatus"
+    tabindex="0"
+  ></div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { eventBus } from "../main";
-import store from '../store/store';
+import store from "../store/store";
 
 export default {
   props: ["index_y", "index_x"],
   data() {
     return {
-      // Change value whenever a square is clicked to endure the computed property will run
+      // Change value whenever a square is clicked to ensure the computed property will run
       // to check if it's active
-      check: false
+      check: false,
     };
   },
   methods: {
@@ -23,7 +29,7 @@ export default {
       eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
 
       this.$store.dispatch("increaseCount");
-      
+
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y
@@ -42,6 +48,7 @@ export default {
   created() {
     eventBus.$on("clicked", coordinates => {
       this.check = !this.check;
+      // if the square should be activated by the one that was clicked
       if (
         (coordinates.row - 1 == this.index_x &&
           coordinates.col == this.index_y) ||

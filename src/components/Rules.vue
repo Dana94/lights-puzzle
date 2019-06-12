@@ -26,8 +26,11 @@ export default {};
 .v-expansion-panel__container {
   width: 320px;
   line-height: 1.5rem;
-}
 
+  &:focus{
+    outline: 2px solid black;
+  }
+}
 .v-expansion-panel {
   margin-bottom: 1.5rem;
 }

@@ -24,11 +24,9 @@ const mutations = {
 };
 
 const actions = {
-  // create grid first
   initBoard({commit}){
     commit('SET_BOARD', board);
   },
-  // change light setting for grid and its associate grids
   activate({commit}, payload){
     commit('ACTIVATE', payload);
   },
@@ -38,7 +36,6 @@ const actions = {
   increaseCount({commit}){
     commit('INCREASE_COUNT');
   }
-
 };
 
 const getters = {
@@ -48,7 +45,6 @@ const getters = {
   moves(state) {
     return state.moves;
   },
-  // check if won
   gameWon: (state) => ({check}) => {
     let won = true;
     state.board.forEach(row => {
