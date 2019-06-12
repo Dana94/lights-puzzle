@@ -33,6 +33,7 @@ export default {
     Row
   },
   created() {
+    // check if game is done
     eventBus.$on("checkBoard", event => {
       this.check = !this.check;
     });

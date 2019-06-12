@@ -2,9 +2,7 @@ import board from '../../data/board';
 
 const state = {
   board: [],
-  moves: 0,
-  focus_x: 0,
-  focus_y: 0
+  moves: 0
 };
 
 const mutations = {
@@ -22,19 +20,13 @@ const mutations = {
   },
   'INCREASE_COUNT'(state){
     state.moves += 1;
-  },
-  'FOCUS_UP'(state, {row, col}){
-    state.focus_x = row - 1 < 0 ? 2 : row - 1;
   }
-
 };
 
 const actions = {
-  // create grid first
   initBoard({commit}){
     commit('SET_BOARD', board);
   },
-  // change light setting for grid and its associate grids
   activate({commit}, payload){
     commit('ACTIVATE', payload);
   },
@@ -43,11 +35,7 @@ const actions = {
   },
   increaseCount({commit}){
     commit('INCREASE_COUNT');
-  },
-  focusUp({commit}, payload){
-    commit('FOCUS_UP', payload);
   }
-
 };
 
 const getters = {
@@ -57,7 +45,6 @@ const getters = {
   moves(state) {
     return state.moves;
   },
-  // check if won
   gameWon: (state) => ({check}) => {
     let won = true;
     state.board.forEach(row => {
@@ -72,10 +59,7 @@ const getters = {
   },
   isOn: (state) => ({row, col}) => {
     return state.board[row][col] == 1;
-  },
-  isInFocus: (state) => ({row, col}) => {
-    return state.focus_x == row && state.focus_y == col;
-  },
+  }
 };
 
 export default {
