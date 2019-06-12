@@ -7,6 +7,7 @@
     @click="changeStatus"
     @keydown.up="focusUp"
     v-focus="focused"
+    tabindex="0"
   ></div>
 </template>
 
@@ -32,7 +33,7 @@ export default {
       eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
 
       this.$store.dispatch("increaseCount");
-      
+
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y

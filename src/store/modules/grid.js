@@ -25,7 +25,6 @@ const mutations = {
   },
   'FOCUS_UP'(state, {row, col}){
     state.focus_x = row - 1 < 0 ? 2 : row - 1;
-    console.log(row, col, '\n', state.focus_x, state.focus_y);
   }
 
 };
@@ -75,7 +74,6 @@ const getters = {
     return state.board[row][col] == 1;
   },
   isInFocus: (state) => ({row, col}) => {
-    console.log(state.focus_x, state.focus_y, '    ', row, col, state.focus_x == row && state.focus_y == col);
     return state.focus_x == row && state.focus_y == col;
   },
 };

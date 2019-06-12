@@ -44,13 +44,7 @@ export default {
   },
   computed: {
     gridOn() {
-      console.log("gridon", "x: ", this.x, "y:", this.y);
       if (this.x || this.y) {
-        console.log(
-          this.x,
-          this.y,
-          this.$store.getters.isOn({ row: this.x, col: this.y })
-        );
         return this.$store.getters.isOn({ row: this.x, col: this.y });
       } else {
         return false;
