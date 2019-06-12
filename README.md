@@ -1,6 +1,6 @@
 # lights-puzzle
 
-> A Vue.js project
+> A 3x3 grid based on the light puzzles on [Khanacademy](https://www.khanacademy.org/math/math-for-fun-and-glory/puzzles/lights-puzzles/e/lights-puzzles-2).
 
 ## Build Setup
 
@@ -14,5 +14,3 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
