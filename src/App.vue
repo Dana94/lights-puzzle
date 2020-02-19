@@ -24,6 +24,7 @@
 <script>
 import Board from "./components/Board.vue";
 import Rules from "./components/Rules.vue";
+import Home from './components/Home.vue';
 
 export default {
   name: "app",
@@ -60,6 +61,7 @@ export default {
   components: {
     Board,
     Rules
+    Home
   }
 };
 </script>
