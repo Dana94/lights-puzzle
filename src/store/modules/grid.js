@@ -2,7 +2,8 @@ import board from '../../data/board';
 
 const state = {
   board: [],
-  moves: 0
+  moves: 0,
+  level: 0,
 };
 
 const mutations = {
@@ -20,6 +21,9 @@ const mutations = {
   },
   'INCREASE_COUNT'(state){
     state.moves += 1;
+  },
+  'SET_LEVEL'(state, level) {
+    state.level = level;
   }
 };
 
@@ -35,6 +39,9 @@ const actions = {
   },
   increaseCount({commit}){
     commit('INCREASE_COUNT');
+  },
+  setLevel({commit}, payload) {
+    commit('SET_LEVEL', payload);
   }
 };
 
@@ -59,6 +66,9 @@ const getters = {
   },
   isOn: (state) => ({row, col}) => {
     return state.board[row][col] == 1;
+  },
+  getLevel(state) {
+    return state.level;
   }
 };
 
