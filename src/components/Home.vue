@@ -16,8 +16,7 @@ export default {
   },
   watch: {
     level () {
-      // console.log(this.level)
-      // this.$emit('levelSelected');
+      this.$store.dispatch('setLevel', this.level);
     }
   }
 }

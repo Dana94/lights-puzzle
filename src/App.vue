@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <v-container>
+    <v-container v-if="!levelSelected">
+      <v-layout align-center column>
+        <Home />
+      </v-layout>
+    </v-container>
+    <v-container v-else>
       <v-layout align-center column>
         <v-flex xs12>
-          <rules></rules>
+          <Rules />
         </v-flex>
       </v-layout>
       <v-layout align-center column>
         <v-flex xs12>
-          <board></board>
+          <Board />
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -53,6 +58,9 @@ export default {
     },
     moves() {
       return this.$store.getters.moves;
+    },
+    levelSelected () {
+      return this.$store.getters.getLevel !== 0;
     }
   },
   created() {
@@ -60,7 +68,7 @@ export default {
   },
   components: {
     Board,
-    Rules
+    Rules,
     Home
   }
 };
