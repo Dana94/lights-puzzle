@@ -49,18 +49,22 @@ export default {
     }
   },
   computed: {
-    gridOn() {
+    gridOn () {
       if (this.x || this.y) {
         return this.$store.getters.isOn({ row: this.x, col: this.y });
       } else {
         return false;
       }
     },
-    moves() {
+    moves () {
       return this.$store.getters.moves;
     },
+    level () {
+      return this.$store.getters.getLevel;
+    },
     levelSelected () {
-      return this.$store.getters.getLevel !== 0;
+      return this.level !== 0;
+    },
     }
   },
   created() {
