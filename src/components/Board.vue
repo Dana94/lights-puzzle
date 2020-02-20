@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x"></row>
+    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level"></row>
     {{won}}
   </div>
 </template>
@@ -10,6 +10,7 @@ import Row from "./Row.vue";
 import { eventBus } from "../main";
 
 export default {
+  props: ['level'],
   data() {
     return {
       check: false,

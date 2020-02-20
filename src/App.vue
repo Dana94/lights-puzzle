@@ -13,7 +13,7 @@
       </v-layout>
       <v-layout align-center column>
         <v-flex xs12>
-          <Board />
+          <Board :level="level" />
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -66,8 +66,12 @@ export default {
       return this.level !== 0;
     },
   },
+  watch: {
+    level () {
+      this.$store.dispatch("initBoard");
+    }
+  },
   created() {
-    this.$store.dispatch("initBoard");
   },
   components: {
     Board,

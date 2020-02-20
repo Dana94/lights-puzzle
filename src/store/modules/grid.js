@@ -1,4 +1,5 @@
-import board from '../../data/board';
+import boardLevel1 from '../../data/boardLevel1';
+import boardLevel2 from '../../data/boardLevel2';
 
 const state = {
   board: [],
@@ -29,7 +30,8 @@ const mutations = {
 
 const actions = {
   initBoard({commit}){
-    commit('SET_BOARD', board);
+    const boardLevel = state.level === 1 ? boardLevel1 : boardLevel2;
+    commit('SET_BOARD', boardLevel);
   },
   activate({commit}, payload){
     commit('ACTIVATE', payload);
