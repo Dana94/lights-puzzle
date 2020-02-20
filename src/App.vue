@@ -65,7 +65,6 @@ export default {
     levelSelected () {
       return this.level !== 0;
     },
-    }
   },
   created() {
     this.$store.dispatch("initBoard");

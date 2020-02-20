@@ -65,7 +65,7 @@ const getters = {
     return won;
   },
   isOn: (state) => ({row, col}) => {
-    return state.board[row][col] == 1;
+    return state.board[row][col] === 1;
   },
   getLevel(state) {
     return state.level;
