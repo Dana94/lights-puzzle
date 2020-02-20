@@ -14,13 +14,16 @@
       <v-layout align-center column>
         <v-flex xs12>
           <Board :level="level" />
+          <div class="stats">
+            <div class="title align-self-center">Moves: {{moves}}</div>
+            <div>
+              <v-btn class="end" @click="end">End Game</v-btn>
+              <v-btn class="reset" @click="reset">Reset</v-btn>
+            </div>
+          </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <div class="stats">
-          <div class>Moves: {{moves}}</div>
-          <v-btn class="reset" @click="reset">Reset</v-btn>
-        </div>
       </v-layout>
     </v-container>
   </div>
@@ -43,6 +46,9 @@ export default {
     activate(row_x, col_y) {
       this.x = row_x;
       this.y = col_y;
+    },
+    end () {
+      this.$store.dispatch('setLevel', 0);
     },
     reset() {
       this.$store.dispatch("reset");
@@ -95,13 +101,16 @@ export default {
   justify-content: center;
 
   .stats {
-    width: 320px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 
     .reset {
       background-color: #551155;
+      color: white;
+    }
+
+    .end {
+      background-color: #1b3344;
       color: white;
     }
   }
