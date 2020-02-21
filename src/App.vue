@@ -60,13 +60,13 @@ export default {
         return this.$store.getters.getBoard;
       }
     },
-    gridOn () {
-      if (this.x || this.y) {
-        return this.$store.getters.isOn({ row: this.x, col: this.y });
-      } else {
-        return false;
-      }
-    },
+    // gridOn () {
+    //   if (this.x || this.y) {
+    //     return this.$store.getters.isOn({ row: this.x, col: this.y });
+    //   } else {
+    //     return false;
+    //   }
+    // },
     moves () {
       return this.$store.getters.moves;
     },

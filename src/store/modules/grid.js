@@ -8,27 +8,33 @@ const state = {
 };
 
 const level1 = [
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0]
+  [0,0,0],
+  [0,0,0],
+  [0,0,0]
 ];
 
 const mutations = {
   'SET_BOARD'(state){
-    state.board = [ ...level1 ];
+    // this is affecting level1 too...why?
+    // spread operator shouldn't be making a pointer
+    // different for multidimensional arrays
+    // for (var i = 0; i < level1.length; i++) {
+    //   state.board[i] = level1[i].slice();
+    // }
+    state.board = level1.map(x => x.slice() );
+        console.log('SET_BOARD', level1[0][0]);
   },
   'CLEAR_BOARD'(state){
     state.board = [];
-    console.log('CLEAR_BOARD', state.board);
   },
 
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
-    state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
+
+    state.board[row][col] = 1;
   },
   'RESET'(state){
     state.board = state.board.map(x => x.map(y => y * 0));
-    console.log('reset', state.board);
     state.moves = 0;
   },
   'INCREASE_COUNT'(state){
@@ -41,11 +47,6 @@ const mutations = {
 
 const actions = {
   initBoard({commit}){
-    // this works...
-    // let boardLevelTest = [ ...boardLevel1 ];
-    // boardLevelTest[0] = '111';
-    // console.log('CHANGED?', boardLevel1)
-
     // let boardLevel;
     // switch (state.level) {
     //   case (1):
@@ -58,7 +59,6 @@ const actions = {
     commit('CLEAR_BOARD');
   },
   activate({commit}, payload){
-    console.log('ACTIVATE', state.board);
     commit('ACTIVATE', payload);
   },
   reset({commit}) {

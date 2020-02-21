@@ -20,7 +20,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('clearBoard');
+    // this.$store.dispatch('clearBoard');
   }
 }
 </script>
