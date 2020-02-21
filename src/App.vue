@@ -13,7 +13,7 @@
       </v-layout>
       <v-layout align-center column>
         <v-flex xs12>
-          <Board :level="level" />
+          <Board :level="level" :board="board" />
           <div class="stats">
             <div class="title align-self-center">Moves: {{moves}}</div>
             <div>
@@ -48,13 +48,18 @@ export default {
       this.y = col_y;
     },
     end () {
-      this.$store.dispatch('setLevel', 0);
+      this.$store.dispatch("endGame");
     },
     reset() {
       this.$store.dispatch("reset");
     }
   },
   computed: {
+    board() {
+      if (this.levelSelected) {
+        return this.$store.getters.getBoard;
+      }
+    },
     gridOn () {
       if (this.x || this.y) {
         return this.$store.getters.isOn({ row: this.x, col: this.y });
@@ -74,10 +79,10 @@ export default {
   },
   watch: {
     level () {
-      this.$store.dispatch("initBoard");
+      if (this.level !== 0) {
+        this.$store.dispatch("initBoard");
+      }
     }
-  },
-  created() {
   },
   components: {
     Board,

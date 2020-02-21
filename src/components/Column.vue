@@ -58,6 +58,7 @@ export default {
           coordinates.col - 1 == this.index_y) ||
         (coordinates.row == this.index_x && coordinates.col + 1 == this.index_y)
       ) {
+        console.log(this.index_x, this.index_y);
         this.$store.dispatch("activate", {
           row: this.index_x,
           col: this.index_y,

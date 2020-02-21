@@ -10,7 +10,7 @@ import Row from "./Row.vue";
 import { eventBus } from "../main";
 
 export default {
-  props: ['level'],
+  props: ['level', 'board'],
   data() {
     return {
       check: false,
@@ -18,9 +18,6 @@ export default {
     };
   },
   computed: {
-    board() {
-      return this.$store.getters.createBoard;
-    },
     won() {
       if (this.$store.getters.gameWon({ check: this.check })) {
         setTimeout(() => {
