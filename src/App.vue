@@ -36,17 +36,7 @@ import Home from './components/Home.vue';
 
 export default {
   name: "app",
-  data() {
-    return {
-      x: "",
-      y: ""
-    };
-  },
   methods: {
-    activate(row_x, col_y) {
-      this.x = row_x;
-      this.y = col_y;
-    },
     end () {
       this.$store.dispatch("endGame");
     },
@@ -60,13 +50,6 @@ export default {
         return this.$store.getters.getBoard;
       }
     },
-    // gridOn () {
-    //   if (this.x || this.y) {
-    //     return this.$store.getters.isOn({ row: this.x, col: this.y });
-    //   } else {
-    //     return false;
-    //   }
-    // },
     moves () {
       return this.$store.getters.moves;
     },
@@ -83,6 +66,9 @@ export default {
         this.$store.dispatch("initBoard");
       }
     }
+  },
+  created () {
+    // this.$store.dispatch("initBoard");
   },
   components: {
     Board,

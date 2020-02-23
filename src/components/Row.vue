@@ -1,6 +1,6 @@
 <template>
   <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2, rowLevel3: level === 3 }">
-    <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x"></column>
+    <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x" :level="level"></column>
   </div>
 </template>
 

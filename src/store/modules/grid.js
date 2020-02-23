@@ -3,12 +3,12 @@ import { boardLevel1, boardLevel2 } from '../../data/boards';
 const state = {
   board: [],
   moves: 0,
-  level: 0,
+  level: 0
 };
 
 const mutations = {
-  'SET_BOARD'(state){
-    state.board = boardLevel1.map(x => [ ...x ] );
+  'SET_BOARD'(state, boardLevel){
+    state.board = boardLevel;
   },
   'CLEAR_BOARD'(state){
     state.board = [];
@@ -16,6 +16,27 @@ const mutations = {
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
     state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
+    console.log(row, col);
+    // top
+    if (row - 1 >= 0) {
+        state.board[row - 1][col] = state.board[row - 1][col] === 1 ? 0 : 1;
+        console.log(row - 1, col);
+    }
+    // left
+    if (col - 1 >= 0) {
+        state.board[row][col - 1] = state.board[row][col - 1] === 1 ? 0 : 1;
+        console.log(row, col - 1);
+    }
+    // right
+    if (col + 1 <= 2) {
+      state.board[row][col + 1] = state.board[row][col + 1] === 1 ? 0 : 1;
+      console.log(row, col + 1);
+    }
+    // bottom
+    if (row + 1 <= 2) {
+        state.board[row + 1][col] = state.board[row + 1][col] === 1 ? 0 : 1;
+        console.log(row + 1, col);
+    }
   },
   'RESET'(state){
     state.board = state.board.map(x => x.map(y => y * 0));
@@ -31,13 +52,17 @@ const mutations = {
 
 const actions = {
   initBoard({commit}){
-    // let boardLevel;
-    // switch (state.level) {
-    //   case (1):
-    //   boardLevel = [ ...boardLevel1 ];
-    //   break;
-    // }
-    commit('SET_BOARD');
+    let boardLevel;
+    switch (state.level) {
+      case (1):
+      boardLevel = boardLevel1.map(row => [ ...row ] );
+      break;
+
+      case (2):
+      boardLevel = boardLevel2.map(row => [ ...row ] );
+      break;
+    }
+    commit('SET_BOARD', boardLevel);
   },
   clearBoard({commit}) {
     commit('CLEAR_BOARD');
@@ -80,6 +105,7 @@ const getters = {
     return won;
   },
   isOn: (state) => ({row, col}) => {
+    console.log('active', row, col);
     return state.board[row][col] === 1;
   },
   getLevel(state) {

@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level"></row>
-    {{won}}
+    <!-- {{won}} -->
   </div>
 </template>
 

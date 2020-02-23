@@ -18,9 +18,6 @@ export default {
     level () {
       this.$store.dispatch('setLevel', this.level);
     }
-  },
-  created() {
-    // this.$store.dispatch('clearBoard');
   }
 }
 </script>
