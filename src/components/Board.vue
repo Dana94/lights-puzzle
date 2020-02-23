@@ -13,13 +13,13 @@ export default {
   props: ['level', 'board'],
   data() {
     return {
-      check: false,
+      checkBoard: false,
       gameWon: false
     };
   },
   computed: {
     won() {
-      if (this.$store.getters.gameWon({ check: this.check })) {
+      if (this.$store.getters.gameWon({ check: this.checkBoard })) {
         setTimeout(() => {
           alert("You won! Woohoo!");
           this.$store.dispatch("reset");
@@ -33,7 +33,7 @@ export default {
   created() {
     // check if game is done
     eventBus.$on("checkBoard", event => {
-      this.check = !this.check;
+      this.checkBoard = !this.checkBoard;
     });
   }
 };
