@@ -20,6 +20,8 @@ export default {
       // Change value whenever a square is clicked to ensure the computed property will run
       // to check if it's active
       check: false,
+      x: 0,
+      y: 0
     };
   },
   methods: {
@@ -27,6 +29,8 @@ export default {
       this.check = !this.check;
 
       // eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
+      this.x = this.index_x;
+      this.y = this.index_y;
 
       this.$store.dispatch("increaseCount");
 
@@ -39,45 +43,20 @@ export default {
   computed: {
     active() {
       return this.$store.getters.isOn({
-        row: this.index_x,
-        col: this.index_y,
+        row: this.x,
+        col: this.y,
         check: this.check
       });
     },
-    levelSelected() {
-      return this.$store.getters.getLevel !== 0;
-    }
   },
   watch: {
-    levelSelected() {
-      if (this.level === 0) {
-        console.log("set check back to false");
-        this.check = false;
-      }
+    check() {
+      this.check = false;
+      // if (this.level === 0) {
+      //   console.log("set check back to false");
+      //   this.check = false;
+      // }
     }
-  },
-  created() {
-    // eventBus.$on("clicked", coordinates => {
-    //   // this.check = !this.check;
-    //   // if the square should be activated by the one that was clicked
-    //   if (
-    //     (coordinates.row - 1 == this.index_x &&
-    //       coordinates.col == this.index_y) ||
-    //     (coordinates.row + 1 == this.index_x &&
-    //       coordinates.col == this.index_y) ||
-    //     (coordinates.row == this.index_x &&
-    //       coordinates.col - 1 == this.index_y) ||
-    //     (coordinates.row == this.index_x && coordinates.col + 1 == this.index_y)
-    //   ) {
-    //     console.log(this.index_x, this.index_y);
-    //     // this.$store.dispatch("activate", {
-    //     //   row: this.index_x,
-    //     //   col: this.index_y,
-    //     //   check: this.check
-    //     // });
-    //     eventBus.$emit("checkBoard");
-    //   }
-    // });
   }
 };
 </script>
