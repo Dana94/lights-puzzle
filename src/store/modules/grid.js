@@ -1,5 +1,4 @@
-import { boardLevel1 } from '../../data/boardLevel1';
-import boardLevel2 from '../../data/boardLevel2';
+import { boardLevel1, boardLevel2 } from '../../data/boards';
 
 const state = {
   board: [],
