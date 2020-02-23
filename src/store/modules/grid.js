@@ -7,31 +7,16 @@ const state = {
   level: 0,
 };
 
-const level1 = [
-  [0,0,0],
-  [0,0,0],
-  [0,0,0]
-];
-
 const mutations = {
   'SET_BOARD'(state){
-    // this is affecting level1 too...why?
-    // spread operator shouldn't be making a pointer
-    // different for multidimensional arrays
-    // for (var i = 0; i < level1.length; i++) {
-    //   state.board[i] = level1[i].slice();
-    // }
-    state.board = level1.map(x => x.slice() );
-        console.log('SET_BOARD', level1[0][0]);
+    state.board = boardLevel1.map(x => [ ...x ] );
   },
   'CLEAR_BOARD'(state){
     state.board = [];
   },
-
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
-
-    state.board[row][col] = 1;
+    state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
   },
   'RESET'(state){
     state.board = state.board.map(x => x.map(y => y * 0));
