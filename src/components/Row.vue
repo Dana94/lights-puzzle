@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2 }">
+  <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2, rowLevel3: level === 3 }">
     <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x"></column>
   </div>
 </template>
@@ -22,10 +22,13 @@ export default {
   grid-gap: 10px;
 
   &.rowLevel1 {
-    grid-template-columns: 100px 100px 100px;
+    grid-template-columns: repeat(3, 100px);
   }
   &.rowLevel2 {
-    grid-template-columns: 100px 100px 100px 100px 100px;
+    grid-template-columns: repeat(5, 100px);
+  }
+  &.rowLevel3 {
+    grid-template-columns: repeat(7, 100px);
   }
 }
 </style>
