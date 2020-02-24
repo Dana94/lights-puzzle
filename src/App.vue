@@ -13,14 +13,17 @@
       </v-layout>
       <v-layout align-center column>
         <v-flex xs12>
-          <Board />
+          <Board :level="level" :board="board" />
+          <div class="stats">
+            <div class="title align-self-center">Moves: {{moves}}</div>
+            <div>
+              <v-btn class="end" @click="end">End Game</v-btn>
+              <v-btn class="reset" @click="reset">Reset</v-btn>
+            </div>
+          </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <div class="stats">
-          <div class>Moves: {{moves}}</div>
-          <v-btn class="reset" @click="reset">Reset</v-btn>
-        </div>
       </v-layout>
     </v-container>
   </div>
@@ -33,38 +36,39 @@ import Home from './components/Home.vue';
 
 export default {
   name: "app",
-  data() {
-    return {
-      x: "",
-      y: ""
-    };
-  },
   methods: {
-    activate(row_x, col_y) {
-      this.x = row_x;
-      this.y = col_y;
+    end () {
+      this.$store.dispatch("endGame");
     },
     reset() {
       this.$store.dispatch("reset");
     }
   },
   computed: {
-    gridOn() {
-      if (this.x || this.y) {
-        return this.$store.getters.isOn({ row: this.x, col: this.y });
-      } else {
-        return false;
+    board() {
+      if (this.levelSelected) {
+        return this.$store.getters.getBoard;
       }
     },
-    moves() {
-      return this.$store.getters.moves;
+    moves () {
+      return this.$store.getters.getMoves;
+    },
+    level () {
+      return this.$store.getters.getLevel;
     },
     levelSelected () {
-      return this.$store.getters.getLevel !== 0;
+      return this.level !== 0;
+    },
+  },
+  watch: {
+    level () {
+      if (this.level !== 0) {
+        this.$store.dispatch("initBoard");
+      }
     }
   },
-  created() {
-    this.$store.dispatch("initBoard");
+  created () {
+    // this.$store.dispatch("initBoard");
   },
   components: {
     Board,
@@ -88,13 +92,16 @@ export default {
   justify-content: center;
 
   .stats {
-    width: 320px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 
     .reset {
       background-color: #551155;
+      color: white;
+    }
+
+    .end {
+      background-color: #1b3344;
       color: white;
     }
   }

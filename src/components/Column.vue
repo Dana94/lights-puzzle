@@ -1,7 +1,7 @@
 <template>
   <div
     class="column"
-    :class="{on: active, off: !active}"
+    :class="{ on: active, off: !active }"
     @keydown.enter="changeStatus"
     @click="changeStatus"
     tabindex="0"
@@ -14,58 +14,34 @@ import { eventBus } from "../main";
 import store from "../store/store";
 
 export default {
-  props: ["index_y", "index_x"],
+  props: ["index_y", "index_x", "level"],
   data() {
     return {
-      // Change value whenever a square is clicked to ensure the computed property will run
-      // to check if it's active
-      check: false,
     };
   },
   methods: {
     changeStatus() {
-      this.check = !this.check;
-
-      eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
-
       this.$store.dispatch("increaseCount");
 
       this.$store.dispatch("activate", {
         row: this.index_x,
         col: this.index_y
       });
+      eventBus.$emit('checkBoard');
     }
   },
   computed: {
+    moves () {
+      return this.$store.getters.getMoves;
+    },
     active() {
-      return this.$store.getters.isOn({
-        row: this.index_x,
-        col: this.index_y,
-        check: this.check
-      });
-    }
-  },
-  created() {
-    eventBus.$on("clicked", coordinates => {
-      this.check = !this.check;
-      // if the square should be activated by the one that was clicked
-      if (
-        (coordinates.row - 1 == this.index_x &&
-          coordinates.col == this.index_y) ||
-        (coordinates.row + 1 == this.index_x &&
-          coordinates.col == this.index_y) ||
-        (coordinates.row == this.index_x &&
-          coordinates.col - 1 == this.index_y) ||
-        (coordinates.row == this.index_x && coordinates.col + 1 == this.index_y)
-      ) {
-        this.$store.dispatch("activate", {
+      if (this.moves) {
+        return this.$store.getters.isOn({
           row: this.index_x,
-          col: this.index_y,
-          check: this.check
+          col: this.index_y
         });
-        eventBus.$emit("checkBoard");
       }
-    });
+    },
   }
 };
 </script>

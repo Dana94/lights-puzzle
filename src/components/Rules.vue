@@ -5,13 +5,14 @@
         <v-icon></v-icon>
       </template>
       <template v-slot:header>
-        <div>Rules</div>
+        <div class="title center">Rules</div>
       </template>
       <v-card>
         <v-card-text>
           Get all the squares to light up!
           Clicking on one square will change its status as well as any square sharing a side with that square.
-          Good luck :)
+          <br />
+          Good luck. :)
         </v-card-text>
       </v-card>
     </v-expansion-panel-content>
@@ -33,5 +34,10 @@ export default {};
 }
 .v-expansion-panel {
   margin-bottom: 1.5rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 </style>

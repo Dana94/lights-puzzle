@@ -1,19 +1,34 @@
-import board from '../../data/board';
+import { boardLevel1, boardLevel2, boardLevel3 } from '../../data/boards';
 
 const state = {
   board: [],
   moves: 0,
-  level: 0,
+  level: 0
 };
 
 const mutations = {
-  'SET_BOARD'(state, board){
-    state.board = board;
+  'SET_BOARD'(state, boardLevel){
+    state.board = boardLevel;
   },
-
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
     state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
+    // top
+    if (row - 1 >= 0) {
+        state.board[row - 1][col] = state.board[row - 1][col] === 1 ? 0 : 1;
+    }
+    // left
+    if (col - 1 >= 0) {
+        state.board[row][col - 1] = state.board[row][col - 1] === 1 ? 0 : 1;
+    }
+    // right
+    if (col + 1 <= state.board[0].length - 1) {
+      state.board[row][col + 1] = state.board[row][col + 1] === 1 ? 0 : 1;
+    }
+    // bottom
+    if (row + 1 <= state.board.length - 1) {
+        state.board[row + 1][col] = state.board[row + 1][col] === 1 ? 0 : 1;
+    }
   },
   'RESET'(state){
     state.board = state.board.map(x => x.map(y => y * 0));
@@ -29,7 +44,22 @@ const mutations = {
 
 const actions = {
   initBoard({commit}){
-    commit('SET_BOARD', board);
+    let boardLevel;
+
+    switch (state.level) {
+      case (1):
+      boardLevel = boardLevel1.map(row => [ ...row ] );
+      break;
+
+      case (2):
+      boardLevel = boardLevel2.map(row => [ ...row ] );
+      break;
+
+      case (3):
+      boardLevel = boardLevel3.map(row => [ ...row ] );
+      break;
+    }
+    commit('SET_BOARD', boardLevel);
   },
   activate({commit}, payload){
     commit('ACTIVATE', payload);
@@ -42,14 +72,18 @@ const actions = {
   },
   setLevel({commit}, payload) {
     commit('SET_LEVEL', payload);
+  },
+  endGame({commit}) {
+    commit('SET_LEVEL', 0);
+    commit('RESET');
   }
 };
 
 const getters = {
-  createBoard(state) {
+  getBoard(state) {
     return state.board;
   },
-  moves(state) {
+  getMoves(state) {
     return state.moves;
   },
   gameWon: (state) => ({check}) => {
@@ -65,7 +99,7 @@ const getters = {
     return won;
   },
   isOn: (state) => ({row, col}) => {
-    return state.board[row][col] == 1;
+    return state.board[row][col] === 1;
   },
   getLevel(state) {
     return state.level;
