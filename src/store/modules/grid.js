@@ -1,4 +1,4 @@
-import { boardLevel1, boardLevel2 } from '../../data/boards';
+import { boardLevel1, boardLevel2, boardLevel3 } from '../../data/boards';
 
 const state = {
   board: [],
@@ -10,32 +10,24 @@ const mutations = {
   'SET_BOARD'(state, boardLevel){
     state.board = boardLevel;
   },
-  'CLEAR_BOARD'(state){
-    state.board = [];
-  },
   // change light value 1/0
   'ACTIVATE'(state, {row, col}) {
     state.board[row][col] = state.board[row][col] === 1 ? 0 : 1;
-    console.log(row, col);
     // top
     if (row - 1 >= 0) {
         state.board[row - 1][col] = state.board[row - 1][col] === 1 ? 0 : 1;
-        console.log(row - 1, col);
     }
     // left
     if (col - 1 >= 0) {
         state.board[row][col - 1] = state.board[row][col - 1] === 1 ? 0 : 1;
-        console.log(row, col - 1);
     }
     // right
-    if (col + 1 <= 2) {
+    if (col + 1 <= state.board[0].length - 1) {
       state.board[row][col + 1] = state.board[row][col + 1] === 1 ? 0 : 1;
-      console.log(row, col + 1);
     }
     // bottom
-    if (row + 1 <= 2) {
+    if (row + 1 <= state.board.length - 1) {
         state.board[row + 1][col] = state.board[row + 1][col] === 1 ? 0 : 1;
-        console.log(row + 1, col);
     }
   },
   'RESET'(state){
@@ -53,6 +45,7 @@ const mutations = {
 const actions = {
   initBoard({commit}){
     let boardLevel;
+
     switch (state.level) {
       case (1):
       boardLevel = boardLevel1.map(row => [ ...row ] );
@@ -61,11 +54,12 @@ const actions = {
       case (2):
       boardLevel = boardLevel2.map(row => [ ...row ] );
       break;
+
+      case (3):
+      boardLevel = boardLevel3.map(row => [ ...row ] );
+      break;
     }
     commit('SET_BOARD', boardLevel);
-  },
-  clearBoard({commit}) {
-    commit('CLEAR_BOARD');
   },
   activate({commit}, payload){
     commit('ACTIVATE', payload);
@@ -89,7 +83,7 @@ const getters = {
   getBoard(state) {
     return state.board;
   },
-  moves(state) {
+  getMoves(state) {
     return state.moves;
   },
   gameWon: (state) => ({check}) => {
@@ -105,7 +99,6 @@ const getters = {
     return won;
   },
   isOn: (state) => ({row, col}) => {
-    console.log('active', row, col);
     return state.board[row][col] === 1;
   },
   getLevel(state) {

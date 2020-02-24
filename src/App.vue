@@ -51,7 +51,7 @@ export default {
       }
     },
     moves () {
-      return this.$store.getters.moves;
+      return this.$store.getters.getMoves;
     },
     level () {
       return this.$store.getters.getLevel;

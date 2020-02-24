@@ -27,11 +27,12 @@ export default {
         row: this.index_x,
         col: this.index_y
       });
+      eventBus.$emit('checkBoard');
     }
   },
   computed: {
     moves () {
-      return this.$store.getters.moves;
+      return this.$store.getters.getMoves;
     },
     active() {
       if (this.moves) {
