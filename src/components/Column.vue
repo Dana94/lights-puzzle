@@ -17,21 +17,10 @@ export default {
   props: ["index_y", "index_x", "level"],
   data() {
     return {
-      // Change value whenever a square is clicked to ensure the computed property will run
-      // to check if it's active
-      check: false,
-      x: 0,
-      y: 0
     };
   },
   methods: {
     changeStatus() {
-      this.check = !this.check;
-
-      // eventBus.$emit("clicked", { row: this.index_x, col: this.index_y });
-      this.x = this.index_x;
-      this.y = this.index_y;
-
       this.$store.dispatch("increaseCount");
 
       this.$store.dispatch("activate", {
@@ -41,22 +30,17 @@ export default {
     }
   },
   computed: {
-    active() {
-      return this.$store.getters.isOn({
-        row: this.x,
-        col: this.y,
-        check: this.check
-      });
+    moves () {
+      return this.$store.getters.moves;
     },
-  },
-  watch: {
-    check() {
-      this.check = false;
-      // if (this.level === 0) {
-      //   console.log("set check back to false");
-      //   this.check = false;
-      // }
-    }
+    active() {
+      if (this.moves) {
+        return this.$store.getters.isOn({
+          row: this.index_x,
+          col: this.index_y
+        });
+      }
+    },
   }
 };
 </script>
