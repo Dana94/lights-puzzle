@@ -5,15 +5,15 @@
     @keydown.enter="changeStatus"
     @click="changeStatus"
     :tabindex="index_x === 0 && index_y === 0 ? 0 : -1"
-    @focus="setFocus(index_x, index_y)"
     @keydown.up="setFocus(index_x - 1, index_y)"
     @keydown.down="setFocus(index_x + 1, index_y)"
     @keydown.left="setFocus(index_x, index_y - 1)"
     @keydown.right="setFocus(index_x, index_y + 1)"
-    :focus="index_x === 15"
+    @focus="setFocus(index_x, index_y)"
   ></div>
 </template>
 <script>
+// @focus="setFocus(index_x, index_y)"
 // :focus="focus.x === index_x && focus.y === index_y"
 import { mapGetters, mapActions } from "vuex";
 import { eventBus } from "../main";
@@ -39,7 +39,7 @@ export default {
       this.$store.dispatch('setFocus', {
         x: focusX,
         y: focusY
-      })
+      });
     }
   },
   computed: {
@@ -55,8 +55,6 @@ export default {
       }
     },
     focus() {
-      let focus = this.$store.getters.getFocus;
-      console.log(focus.x, focus.y)
       return this.$store.getters.getFocus;
     }
   }
@@ -71,6 +69,10 @@ export default {
   }
   &.off {
     background-color: #115511;
+  }
+  &:focus {
+    outline: none;
+    border: 5px solid pink;
   }
 }
 </style>
