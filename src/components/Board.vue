@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level" :ref="rowRef"></row>
+    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level"></row>
     {{won}}
   </div>
 </template>
@@ -25,16 +25,12 @@ export default {
           this.$store.dispatch("reset");
         }, 500);
       }
-    },
-    rowRef () {
-      return `row_${0}`;
     }
   },
   components: {
     Row
   },
   created() {
-    console.log('board', this.$refs);
     // check if game is done
     eventBus.$on("checkBoard", event => {
       this.checkBoard = !this.checkBoard;

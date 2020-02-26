@@ -45,7 +45,7 @@ const mutations = {
     state.level = level;
   },
   'SET_FOCUS'(state, { x, y }) {
-    if (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) {
+    if ( (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) || (x === '' && y === '')) {
       state.focus.x = x;
       state.focus.y = y;
     }
@@ -86,6 +86,7 @@ const actions = {
   endGame({commit}) {
     commit('SET_LEVEL', 0);
     commit('RESET');
+    commit('SET_FOCUS', {x: '', y: ''});
   },
   setFocus({commit}, payload) {
     commit('SET_FOCUS', payload);

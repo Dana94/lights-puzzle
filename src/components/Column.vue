@@ -1,6 +1,7 @@
 <template>
   <div
     class="column"
+    :ref="colRef"
     :class="{ on: active, off: !active }"
     @keydown.enter="changeStatus"
     @click="changeStatus"
@@ -9,7 +10,6 @@
     @keydown.down="setFocus(index_x + 1, index_y)"
     @keydown.left="setFocus(index_x, index_y - 1)"
     @keydown.right="setFocus(index_x, index_y + 1)"
-    @focus="setFocus(index_x, index_y)"
   ></div>
 </template>
 <script>
@@ -40,6 +40,7 @@ export default {
         x: focusX,
         y: focusY
       });
+      eventBus.$emit('changeFocus');
     }
   },
   computed: {
@@ -56,7 +57,20 @@ export default {
     },
     focus() {
       return this.$store.getters.getFocus;
+    },
+    colRef () {
+      return `col_${this.index_x}_${this.index_y}`;
     }
+  },
+  mounted () {
+    // change focus depending on state's focus coordinates
+    eventBus.$on("changeFocus", event => {
+      const focusElem = `col_${this.focus.x}_${this.focus.y}`;
+      console.log('here', focusElem);
+      if (this.focus.x === this.index_x && this.focus.y === this.index_y) {
+        this.$refs[focusElem].focus();
+      }
+    });
   }
 };
 </script>
