@@ -5,8 +5,8 @@ const state = {
   moves: 0,
   level: 0,
   focus: {
-    x: '',
-    y: ''
+    x: 0,
+    y: 0
   }
 };
 
@@ -86,7 +86,6 @@ const actions = {
   endGame({commit}) {
     commit('SET_LEVEL', 0);
     commit('RESET');
-    commit('SET_FOCUS', {x: '', y: ''});
   },
   setFocus({commit}, payload) {
     commit('SET_FOCUS', payload);

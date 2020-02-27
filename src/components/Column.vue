@@ -10,11 +10,11 @@
     @keydown.down="setFocus(index_x + 1, index_y)"
     @keydown.left="setFocus(index_x, index_y - 1)"
     @keydown.right="setFocus(index_x, index_y + 1)"
+    @focus="setFocus(index_x, index_y)"
   ></div>
 </template>
+
 <script>
-// @focus="setFocus(index_x, index_y)"
-// :focus="focus.x === index_x && focus.y === index_y"
 import { mapGetters, mapActions } from "vuex";
 import { eventBus } from "../main";
 import store from "../store/store";
@@ -66,8 +66,7 @@ export default {
     // change focus depending on state's focus coordinates
     eventBus.$on("changeFocus", event => {
       const focusElem = `col_${this.focus.x}_${this.focus.y}`;
-      console.log('here', focusElem);
-      if (this.focus.x === this.index_x && this.focus.y === this.index_y) {
+      if (!!this.$refs[focusElem] && this.focus.x === this.index_x && this.focus.y === this.index_y) {
         this.$refs[focusElem].focus();
       }
     });
@@ -75,7 +74,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .column {
   border-radius: 25px;
   &.on {
@@ -86,7 +85,7 @@ export default {
   }
   &:focus {
     outline: none;
-    border: 5px solid pink;
+    border: 5px solid #DD55DD;
   }
 }
 </style>
