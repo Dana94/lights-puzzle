@@ -10,7 +10,7 @@
       <v-card>
         <v-card-text>
           Get all the squares to light up!
-          Clicking on one square will change its status as well as any square sharing a side with that square.
+          Clicking on one square will turn it on/off as well as any square sharing a side with it.
           <br />
           Good luck. :)
         </v-card-text>

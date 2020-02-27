@@ -3,7 +3,11 @@ import { boardLevel1, boardLevel2, boardLevel3 } from '../../data/boards';
 const state = {
   board: [],
   moves: 0,
-  level: 0
+  level: 0,
+  focus: {
+    x: 0,
+    y: 0
+  }
 };
 
 const mutations = {
@@ -39,6 +43,30 @@ const mutations = {
   },
   'SET_LEVEL'(state, level) {
     state.level = level;
+  },
+  'SET_FOCUS'(state, { x, y }) {
+    if (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) {
+      state.focus.x = x;
+      state.focus.y = y;
+    }
+    // up arrow will focus on the bottom most grid in the column
+    if (x < 0) {
+      state.focus.x = state.board.length - 1;
+    }
+    // down arrow will focus on the top most grid in the column
+    if (x > state.board.length - 1) {
+      state.focus.x = 0;
+    }
+
+    // left arrow will focus on right most square in the row
+    if (y < 0) {
+      state.focus.y = state.board[0].length - 1;
+    }
+
+    // right arrow will focus on left most square in the row
+    if (y > state.board[0].length - 1) {
+      state.focus.y = 0;
+    }
   }
 };
 
@@ -76,6 +104,9 @@ const actions = {
   endGame({commit}) {
     commit('SET_LEVEL', 0);
     commit('RESET');
+  },
+  setFocus({commit}, payload) {
+    commit('SET_FOCUS', payload);
   }
 };
 
@@ -103,6 +134,9 @@ const getters = {
   },
   getLevel(state) {
     return state.level;
+  },
+  getFocus(state) {
+    return state.focus;
   }
 };
 

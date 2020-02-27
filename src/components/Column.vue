@@ -1,10 +1,16 @@
 <template>
   <div
     class="column"
+    :ref="colRef"
     :class="{ on: active, off: !active }"
     @keydown.enter="changeStatus"
     @click="changeStatus"
-    tabindex="0"
+    :tabindex="index_x === 0 && index_y === 0 ? 0 : -1"
+    @keydown.up="setFocus(index_x - 1, index_y)"
+    @keydown.down="setFocus(index_x + 1, index_y)"
+    @keydown.left="setFocus(index_x, index_y - 1)"
+    @keydown.right="setFocus(index_x, index_y + 1)"
+    @focus="setFocus(index_x, index_y)"
   ></div>
 </template>
 
@@ -14,7 +20,7 @@ import { eventBus } from "../main";
 import store from "../store/store";
 
 export default {
-  props: ["index_y", "index_x", "level"],
+  props: ["index_y", "index_x"],
   data() {
     return {
     };
@@ -28,6 +34,13 @@ export default {
         col: this.index_y
       });
       eventBus.$emit('checkBoard');
+    },
+    setFocus (focusX, focusY) {
+      this.$store.dispatch('setFocus', {
+        x: focusX,
+        y: focusY
+      });
+      eventBus.$emit('changeFocus');
     }
   },
   computed: {
@@ -42,11 +55,26 @@ export default {
         });
       }
     },
+    focus() {
+      return this.$store.getters.getFocus;
+    },
+    colRef () {
+      return `col_${this.index_x}_${this.index_y}`;
+    }
+  },
+  mounted () {
+    // change focus depending on state's focus coordinates
+    eventBus.$on("changeFocus", event => {
+      const focusElem = `col_${this.focus.x}_${this.focus.y}`;
+      if (!!this.$refs[focusElem] && this.focus.x === this.index_x && this.focus.y === this.index_y) {
+        this.$refs[focusElem].focus();
+      }
+    });
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .column {
   border-radius: 25px;
   &.on {
@@ -54,6 +82,10 @@ export default {
   }
   &.off {
     background-color: #115511;
+  }
+  &:focus {
+    outline: none;
+    border: 5px solid #DD55DD;
   }
 }
 </style>

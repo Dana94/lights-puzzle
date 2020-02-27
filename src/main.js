@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './App.vue'
 
-import store from './store/store';
+import store from './store/store'
 
 import 'vuetify/dist/vuetify.min.css'
 
