@@ -45,9 +45,27 @@ const mutations = {
     state.level = level;
   },
   'SET_FOCUS'(state, { x, y }) {
-    if ( (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) || (x === '' && y === '')) {
+    if (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) {
       state.focus.x = x;
       state.focus.y = y;
+    }
+    // up arrow will focus on the bottom most grid in the column
+    if (x < 0) {
+      state.focus.x = state.board.length - 1;
+    }
+    // down arrow will focus on the top most grid in the column
+    if (x > state.board.length - 1) {
+      state.focus.x = 0;
+    }
+
+    // left arrow will focus on right most square in the row
+    if (y < 0) {
+      state.focus.y = state.board[0].length - 1;
+    }
+
+    // right arrow will focus on left most square in the row
+    if (y > state.board[0].length - 1) {
+      state.focus.y = 0;
     }
   }
 };
