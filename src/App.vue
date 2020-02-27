@@ -12,19 +12,11 @@
         </v-flex>
       </v-layout>
       <v-layout align-center column>
-        <v-flex xs12>
+        <v-flex xs12 class="board-container">
           <Board :level="level" :board="board" />
-          <div class="stats">
-            <div class="title align-self-center">Moves: {{moves}}</div>
-            <div>
-              <v-btn class="end" @click="end">End Game</v-btn>
-              <v-btn class="reset" @click="reset">Reset</v-btn>
-            </div>
-          </div>
         </v-flex>
       </v-layout>
-      <v-layout row wrap>
-      </v-layout>
+      <v-layout row wrap> </v-layout>
     </v-container>
   </div>
 </template>
@@ -32,43 +24,29 @@
 <script>
 import Board from "./components/Board.vue";
 import Rules from "./components/Rules.vue";
-import Home from './components/Home.vue';
+import Home from "./components/Home.vue";
 
 export default {
   name: "app",
-  methods: {
-    end () {
-      this.$store.dispatch("endGame");
-    },
-    reset() {
-      this.$store.dispatch("reset");
-    }
-  },
   computed: {
     board() {
       if (this.levelSelected) {
         return this.$store.getters.getBoard;
       }
     },
-    moves () {
-      return this.$store.getters.getMoves;
-    },
-    level () {
+    level() {
       return this.$store.getters.getLevel;
     },
-    levelSelected () {
+    levelSelected() {
       return this.level !== 0;
-    },
+    }
   },
   watch: {
-    level () {
+    level() {
       if (this.level !== 0) {
         this.$store.dispatch("initBoard");
       }
     }
-  },
-  created () {
-    // this.$store.dispatch("initBoard");
   },
   components: {
     Board,
@@ -91,18 +69,27 @@ export default {
   display: flex;
   justify-content: center;
 
-  .stats {
-    display: flex;
-    justify-content: space-between;
+  .board-container {
+    position: relative;
 
-    .reset {
-      background-color: #551155;
-      color: white;
-    }
+    // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
+    // that's why they are here instead
+    .stats {
+      position: absolute;
+      right: -9rem;
+      top: 0;
+      display: flex;
+      flex-direction: column;
 
-    .end {
-      background-color: #1b3344;
-      color: white;
+      .reset {
+        background-color: #551155;
+        color: white;
+      }
+
+      .end {
+        background-color: #1b3344;
+        color: white;
+      }
     }
   }
 }

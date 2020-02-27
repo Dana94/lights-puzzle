@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2, rowLevel3: level === 3 }" :ref="rowRef">
+  <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2, rowLevel3: level === 3 }">
     <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x"></column>
   </div>
 </template>
@@ -10,11 +10,6 @@ export default {
   props: ['row', 'index_x', 'level'],
   components: {
     Column
-  },
-  computed: {
-    rowRef () {
-      return `row_${this.index_x}`;
-    }
   }
 };
 </script>
