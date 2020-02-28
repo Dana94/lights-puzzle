@@ -75,17 +75,19 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/base.scss";
+
 .column {
   border-radius: 25px;
   &.on {
-    background-color: #55dd55;
+    background-color: $lightGreen;
   }
   &.off {
-    background-color: #115511;
+    background-color: $green;
   }
   &:focus {
     outline: none;
-    border: 5px solid #DD55DD;
+    border: 5px solid $pink;
   }
 }
 </style>

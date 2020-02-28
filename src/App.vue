@@ -64,7 +64,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $text;
   margin-top: 60px;
   display: flex;
   justify-content: center;
@@ -82,13 +82,13 @@ export default {
       flex-direction: column;
 
       .reset {
-        background-color: #551155;
-        color: white;
+        background-color: $purple;
+        color: $white;
       }
 
       .end {
-        background-color: #1b3344;
-        color: white;
+        background-color: $blue;
+        color: $white;
       }
     }
   }

@@ -24,23 +24,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-// .stats {
-//   position: absolute;
-//   right: -9rem;
-//   top: 0;
-//   display: flex;
-//   flex-direction: column;
-
-//   .reset {
-//     background-color: #551155;
-//     color: white;
-//   }
-
-//   .end {
-//     background-color: #1b3344;
-//     color: white;
-//   }
-// }
-</style>

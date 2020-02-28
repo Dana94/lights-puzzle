@@ -24,12 +24,14 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/base.scss";
+
 .v-expansion-panel__container {
   width: 320px;
   line-height: 1.5rem;
 
   &:focus{
-    outline: 2px solid black;
+    outline: 2px solid $black;
   }
 }
 .v-expansion-panel {
