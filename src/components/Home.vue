@@ -23,16 +23,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/base.scss";
+
 .level1 {
-  background-color: #1b3344 !important;
-  color: white !important;
+  background-color: $green !important;
+  color: $white !important;
 }
 .level2 {
-  background-color: #115511 !important;
-  color: white !important;
+  background-color: $blue !important;
+  color: $white !important;
 }
 .level3 {
-  background-color: #662866 !important;
-  color: white !important;
+  background-color: $purple !important;
+  color: $white !important;
 }
 </style>

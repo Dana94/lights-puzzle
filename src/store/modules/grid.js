@@ -44,6 +44,7 @@ const mutations = {
   'SET_LEVEL'(state, level) {
     state.level = level;
   },
+  // so someone can use arrow eys to navigate the board
   'SET_FOCUS'(state, { x, y }) {
     if (x >= 0 && y >= 0 && y <= state.board[0].length - 1 && x <= state.board.length - 1) {
       state.focus.x = x;
