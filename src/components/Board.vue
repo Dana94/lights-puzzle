@@ -1,8 +1,7 @@
 <template>
   <div class="board">
     <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level"></row>
-    {{won}}
-    <modal :dialog="dialog" @reset="dialog = false"/>
+    <modal :showModal="showModal" @closeModal="showModal = false"/>
     <stats />
   </div>
 </template>
@@ -19,16 +18,14 @@ export default {
     return {
       checkBoard: false,
       gameWon: false,
-      dialog: false
+      showModal: false
     };
   },
-  computed: {
-    won() {
+  watch: {
+    checkBoard() {
       if (this.$store.getters.gameWon({ check: this.checkBoard })) {
         setTimeout(() => {
-          this.dialog = true;
-          // alert("You won! Woohoo!");
-          // this.$store.dispatch("reset");
+          this.showModal = true;
         }, 500);
       }
     }

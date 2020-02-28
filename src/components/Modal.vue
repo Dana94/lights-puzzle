@@ -1,43 +1,19 @@
 <template>
-<v-overlay :value="overlay">
-      <v-btn
-        icon
-        @click="overlay = false"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-
-      <v-dialog v-model="dialog" max-width="290" persistent>
-        <v-card>
-          <v-card-title class="headline flex justify-center">You won!</v-card-title>
-
-          <!-- <v-card-text>What now?</v-card-text> -->
-
-          <v-card-actions class="flex justify-space-around">
-            <v-btn class="end" @click="end">End Game</v-btn>
-            <v-btn class="reset" @click="reset">Reset</v-btn>
-            <!-- <v-btn color="green darken-1" flat="flat" @click="dialog = false">
-              Disagree
-            </v-btn>
-
-            <v-btn color="green darken-1" flat="flat" @click="dialog = false">
-              Agree
-            </v-btn> -->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-    </v-overlay>
+  <sweet-modal hide-close-button blocking ref="modal">
+    <h1>You won!</h1>
+    <v-btn class="end" @click="end">End Game</v-btn>
+    <v-btn class="reset" @click="reset">Reset</v-btn>
+  </sweet-modal>
 </template>
 
 <script>
+import { SweetModal } from "sweet-modal-vue";
+
 export default {
   name: "modal",
-  props: ['dialog'],
+  props: ["showModal"],
   data() {
-    return {
-      overlay: true
-    }
+    return {};
   },
   methods: {
     end() {
@@ -45,16 +21,38 @@ export default {
     },
     reset() {
       this.$store.dispatch("reset");
-      this.$emit('reset');
+      this.$emit("closeModal");
     }
   },
+  watch: {
+    showModal() {
+      if (this.showModal) {
+        this.$refs.modal.open();
+      } else {
+        this.$refs.modal.close();
+      }
+    }
+  },
+  components: {
+    SweetModal
+  }
 };
 </script>
 
 <style lang="scss">
-@import '../assets/base.scss';
+@import "../assets/base.scss";
 
-.v-dialog__content {
-  height: auto !important;
+.sweet-modal {
+  top: 25% !important;
+
+  .reset {
+    background-color: $purple !important;
+    color: $white;
+  }
+
+  .end {
+    background-color: $blue !important;
+    color: $white;
+  }
 }
 </style>
