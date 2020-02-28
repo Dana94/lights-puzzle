@@ -5,7 +5,7 @@
         <v-icon></v-icon>
       </template>
       <template v-slot:header>
-        <div class="title center">Rules</div>
+        <div class="title center">How to Win</div>
       </template>
       <v-card>
         <v-card-text>
