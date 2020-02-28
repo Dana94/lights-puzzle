@@ -86,10 +86,10 @@ export default {
         color: $white;
       }
 
-      .end {
-        background-color: $blue;
-        color: $white;
-      }
+      // .end {
+      //   background-color: $blue;
+      //   color: $white;
+      // }
     }
   }
 }
