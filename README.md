@@ -2,7 +2,7 @@
 
 > A grid game based on the light puzzles on [Khanacademy](https://www.khanacademy.org/math/math-for-fun-and-glory/puzzles/lights-puzzles/e/lights-puzzles-2). You have 3 levels of difficulty to choose from.
 
-The game can be soley accessed through the keybord alone.
+The game can be solely accessed through the keybord alone.
 
 :warning: I strongly encourage you to only view this project on a computer because the larger pzzles will be too large to display well in mobile.
 
