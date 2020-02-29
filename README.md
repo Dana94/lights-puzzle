@@ -4,6 +4,8 @@
 
 The game can be soley accessed through the keybord alone.
 
+:warning: I strongly encourage you to only view this project on a computer because the larger pzzles will be too large to display well in mobile.
+
 ## Installation
 
 1. Clone the repo: `git clone https://github.com/Dana94/lights-puzzle.git`
