@@ -1,7 +1,8 @@
 <template>
   <sweet-modal hide-close-button blocking ref="modal">
-    <h1>You won!</h1>
-    <v-btn class="end" @click="end">End Game</v-btn>
+    <h1 class="mb-2">You won!</h1>
+    <p>What do you want to do next?</p>
+    <v-btn class="end" @click="end">Try Another Level</v-btn>
     <v-btn class="reset" @click="reset">Reset</v-btn>
   </sweet-modal>
 </template>
@@ -51,7 +52,7 @@ export default {
   }
 
   .end {
-    background-color: $blue !important;
+    background-color: $green !important;
     color: $white;
   }
 }
