@@ -25,8 +25,10 @@ export default {
       this.$emit("closeModal");
     },
     changeFocus(ref) {
-      // this.$refs[ref].$el.focus();
-      this.$nextTick(() => this.$refs.end.$el.focus())
+      this.$refs.end.$el.focus()
+      console.log(this.$refs.end.$el.focus());
+      console.log('tabbed!!!');
+      // this.$nextTick(() => this.$refs.end.$el.focus())
     }
   },
   watch: {
