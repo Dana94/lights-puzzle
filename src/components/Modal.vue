@@ -1,14 +1,17 @@
 <template>
-  <sweet-modal hide-close-button blocking ref="modal">
-    <h1 class="mb-2">You won!</h1>
+  <sweet-modal hide-close-button blocking ref="modal" role="dialog">
+    <h1 class="mb-2">You solved level {{level}} in {{moves}} moves!</h1>
     <p>What do you want to do next?</p>
-    <v-btn class="end" ref="end" @click="end">Try Another Level</v-btn>
-    <v-btn class="reset" ref="reset" @keydown.tab="changeFocus('end')" @keydown.shift.tab="changeFocus('end')" @click="reset">Reset</v-btn>
+    <div>
+      <v-btn class="end" ref="end" id="end" @click="end">Try Another Level</v-btn>
+      <v-btn class="reset" ref="reset" @keydown.tab="changeFocus('end')" @click="reset">Reset</v-btn>
+    </div>
   </sweet-modal>
 </template>
 
 <script>
 import { SweetModal } from "sweet-modal-vue";
+import { eventBus } from "../main";
 
 export default {
   name: "modal",
@@ -25,11 +28,20 @@ export default {
       this.$emit("closeModal");
     },
     changeFocus(ref) {
-      this.$refs.end.$el.focus()
-      console.log(this.$refs.end.$el.focus());
-      console.log('tabbed!!!');
-      // this.$nextTick(() => this.$refs.end.$el.focus())
+        // eventBus.$emit('changeFocus');
+        console.log(document.getElementById("end"));
+        setTimeout(() => {
+          document.getElementById("end").focus();
+        }, 5000);
     }
+  },
+  computed: {
+    moves () {
+      return this.$store.getters.getMoves;
+    },
+    level() {
+      return this.$store.getters.getLevel;
+    },
   },
   watch: {
     showModal() {
@@ -44,6 +56,12 @@ export default {
   },
   components: {
     SweetModal
+  },
+  mounted() {
+    eventBus.$on("changeFocus", event => {
+      console.log('here', this.$refs.end.$el);
+      this.$nextTick(() => this.$refs.end.$el.focus());
+    });
   }
 };
 </script>
