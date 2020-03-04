@@ -10,7 +10,7 @@ The game can be solely accessed through the keyboard alone.
 
 1. Clone the repo: `git clone https://github.com/Dana94/lights-puzzle.git`
 1. `cd lights-puzzle`
-1. `npm install` 
+1. `npm install`
 1. `npm run dev` to start a local dev server at `http://localhost:8080`
 
 ## Build Setup
@@ -27,4 +27,3 @@ npm run build
 ```
 ## Notes
 - Styled with [Vuetify](https://vuetifyjs.com/en/).
-- Modal used is a [SweetModal](https://github.com/adeptoas/sweet-modal-vue).
