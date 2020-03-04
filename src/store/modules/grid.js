@@ -7,7 +7,8 @@ const state = {
   focus: {
     x: 0,
     y: 0
-  }
+  },
+  gameWon: false
 };
 
 const mutations = {
@@ -68,6 +69,9 @@ const mutations = {
     if (y > state.board[0].length - 1) {
       state.focus.y = 0;
     }
+  },
+  'SET_GAME_WON'(state, { gameWon }) {
+    state.gameWon = gameWon;
   }
 };
 
@@ -95,6 +99,7 @@ const actions = {
   },
   reset({commit}) {
     commit('RESET');
+    commit('SET_GAME_WON', { gameWon: false });
   },
   increaseCount({commit}){
     commit('INCREASE_COUNT');
@@ -104,10 +109,14 @@ const actions = {
   },
   endGame({commit}) {
     commit('SET_LEVEL', 0);
+    commit('SET_GAME_WON', { gameWon: false });
     commit('RESET');
   },
   setFocus({commit}, payload) {
     commit('SET_FOCUS', payload);
+  },
+  setGameProgress({commit}, payload) {
+    commit('SET_GAME_WON', payload);
   }
 };
 
@@ -138,6 +147,9 @@ const getters = {
   },
   getFocus(state) {
     return state.focus;
+  },
+  isGameWon(state) {
+    return state.gameWon;
   }
 };
 

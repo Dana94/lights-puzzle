@@ -1,8 +1,13 @@
 <template>
   <div id="app">
-    <v-container v-if="!levelSelected">
+    <v-container v-if="!levelSelected && !isGameWon">
       <v-layout align-center column>
         <Home />
+      </v-layout>
+    </v-container>
+    <v-container v-else-if="isGameWon">
+      <v-layout align-center column>
+        <EndGame />
       </v-layout>
     </v-container>
     <v-container v-else>
@@ -25,6 +30,7 @@
 import Board from "./components/Board.vue";
 import Rules from "./components/Rules.vue";
 import Home from "./components/Home.vue";
+import EndGame from "./components/EndGame.vue";
 
 export default {
   name: "app",
@@ -39,6 +45,9 @@ export default {
     },
     levelSelected() {
       return this.level !== 0;
+    },
+    isGameWon() {
+      return this.$store.getters.isGameWon;
     }
   },
   watch: {
@@ -51,7 +60,8 @@ export default {
   components: {
     Board,
     Rules,
-    Home
+    Home,
+    EndGame
   }
 };
 </script>

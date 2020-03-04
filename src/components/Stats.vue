@@ -24,3 +24,25 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/base.scss";
+
+.stats {
+      position: absolute;
+      right: -9rem;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+
+      .reset {
+        background-color: $purple;
+        color: $white;
+      }
+
+      .end {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+</style>
