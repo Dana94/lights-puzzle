@@ -1,13 +1,25 @@
 <template>
-  <div class="row" :class="{ rowLevel1: level === 1, rowLevel2: level === 2, rowLevel3: level === 3 }">
-    <column v-for="(col, j) in row" :key="j" :index_y="j" :index_x="index_x"></column>
+  <div
+    class="row"
+    :class="{
+      rowLevel1: level === 1,
+      rowLevel2: level === 2,
+      rowLevel3: level === 3
+    }"
+  >
+    <column
+      v-for="(col, j) in row"
+      :key="j"
+      :index_y="j"
+      :index_x="index_x"
+    ></column>
   </div>
 </template>
 
 <script>
 import Column from "./Column.vue";
 export default {
-  props: ['row', 'index_x', 'level'],
+  props: ["row", "index_x", "level"],
   components: {
     Column
   }

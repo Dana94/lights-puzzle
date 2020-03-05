@@ -21,10 +21,6 @@ import store from "../store/store";
 
 export default {
   props: ["index_y", "index_x"],
-  data() {
-    return {
-    };
-  },
   methods: {
     changeStatus() {
       this.$store.dispatch("increaseCount");

@@ -1,27 +1,14 @@
 <template>
   <div id="app">
     <v-container v-if="!levelSelected && !isGameWon">
-      <v-layout align-center column>
-        <Home />
-      </v-layout>
+      <Home />
     </v-container>
     <v-container v-else-if="isGameWon">
-      <v-layout align-center column>
-        <EndGame />
-      </v-layout>
+      <EndGame />
     </v-container>
     <v-container v-else>
-      <v-layout align-center column>
-        <v-flex xs12>
-          <Rules />
-        </v-flex>
-      </v-layout>
-      <v-layout align-center column>
-        <v-flex xs12 class="board-container">
-          <Board :level="level" :board="board" />
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap> </v-layout>
+      <Rules />
+      <Board :level="level" :board="board" />
     </v-container>
   </div>
 </template>
@@ -79,27 +66,23 @@ export default {
   display: flex;
   justify-content: center;
 
-  .board-container {
-    position: relative;
+  // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
+  // that's why they are here instead
+  .stats {
+    position: absolute;
+    right: -9rem;
+    top: 0;
+    display: flex;
+    flex-direction: column;
 
-    // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
-    // that's why they are here instead
-    .stats {
-      position: absolute;
-      right: -9rem;
-      top: 0;
-      display: flex;
-      flex-direction: column;
+    .reset {
+      background-color: $purple;
+      color: $white;
+    }
 
-      .reset {
-        background-color: $purple;
-        color: $white;
-      }
-
-      .end {
-        background-color: $blue;
-        color: $white;
-      }
+    .end {
+      background-color: $blue;
+      color: $white;
     }
   }
 }

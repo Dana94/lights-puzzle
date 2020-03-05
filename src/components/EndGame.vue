@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <h1 class="mb-2">You solved level {{ level }} in {{ moves }} moves!</h1>
-    <p class="title">What do you want to do next?</p>
+  <v-layout align-center column>
     <div>
-      <v-btn class="end" @click="end">Try Another Level</v-btn>
-      <v-btn class="reset" @click="reset">Reset</v-btn >
+      <h1 class="mb-2">You solved level {{ level }} in {{ moves }} moves!</h1>
+      <p class="title">What do you want to do next?</p>
+      <div>
+        <v-btn class="end" @click="end">Try Another Level</v-btn>
+        <v-btn class="reset" @click="reset">Play Again</v-btn>
+      </div>
     </div>
-  </div>
+  </v-layout>
 </template>
 
 <script>
 export default {
   name: "EndGame",
-  data() {
-    return {};
-  },
   methods: {
     end() {
       this.$store.dispatch("endGame");
