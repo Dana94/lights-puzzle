@@ -1,22 +1,14 @@
 <template>
   <div id="app">
-    <v-container v-if="!levelSelected">
-      <v-layout align-center column>
-        <Home />
-      </v-layout>
+    <v-container v-if="!levelSelected && !isGameWon">
+      <Home />
+    </v-container>
+    <v-container v-else-if="isGameWon">
+      <EndGame />
     </v-container>
     <v-container v-else>
-      <v-layout align-center column>
-        <v-flex xs12>
-          <Rules />
-        </v-flex>
-      </v-layout>
-      <v-layout align-center column>
-        <v-flex xs12 class="board-container">
-          <Board :level="level" :board="board" />
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap> </v-layout>
+      <Rules />
+      <Board :level="level" :board="board" />
     </v-container>
   </div>
 </template>
@@ -25,6 +17,7 @@
 import Board from "./components/Board.vue";
 import Rules from "./components/Rules.vue";
 import Home from "./components/Home.vue";
+import EndGame from "./components/EndGame.vue";
 
 export default {
   name: "app",
@@ -39,6 +32,9 @@ export default {
     },
     levelSelected() {
       return this.level !== 0;
+    },
+    isGameWon() {
+      return this.$store.getters.isGameWon;
     }
   },
   watch: {
@@ -51,7 +47,8 @@ export default {
   components: {
     Board,
     Rules,
-    Home
+    Home,
+    EndGame
   }
 };
 </script>
@@ -69,27 +66,23 @@ export default {
   display: flex;
   justify-content: center;
 
-  .board-container {
-    position: relative;
+  // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
+  // that's why they are here instead
+  .stats {
+    position: absolute;
+    right: -9rem;
+    top: 0;
+    display: flex;
+    flex-direction: column;
 
-    // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
-    // that's why they are here instead
-    .stats {
-      position: absolute;
-      right: -9rem;
-      top: 0;
-      display: flex;
-      flex-direction: column;
+    .reset {
+      background-color: $purple;
+      color: $white;
+    }
 
-      .reset {
-        background-color: $purple;
-        color: $white;
-      }
-
-      .end {
-        background-color: $blue;
-        color: $white;
-      }
+    .end {
+      background-color: $blue;
+      color: $white;
     }
   }
 }

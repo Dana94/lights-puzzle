@@ -1,39 +1,44 @@
 <template>
-  <div class="board">
-    <row v-for="(row, x) in board" :key="x" :row="row" :index_x="x" :level="level"></row>
-    <modal :showModal="showModal" @closeModal="showModal = false"/>
-    <stats />
-  </div>
+  <v-layout align-center column>
+    <v-flex xs12 class="board-container">
+      <div class="board">
+        <row
+          v-for="(row, x) in board"
+          :key="x"
+          :row="row"
+          :index_x="x"
+          :level="level"
+        ></row>
+        <stats />
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 import Row from "./Row.vue";
-import Stats from './Stats.vue';
-import Modal from './Modal.vue';
+import Stats from "./Stats.vue";
 import { eventBus } from "../main";
 
 export default {
-  props: ['level', 'board'],
+  props: ["level", "board"],
   data() {
     return {
-      checkBoard: false,
-      gameWon: false,
-      showModal: false
+      checkBoard: false
     };
   },
   watch: {
     checkBoard() {
       if (this.$store.getters.gameWon({ check: this.checkBoard })) {
         setTimeout(() => {
-          this.showModal = true;
+          this.$store.dispatch("setGameProgress", { gameWon: true });
         }, 500);
       }
     }
   },
   components: {
     Row,
-    Stats,
-    Modal
+    Stats
   },
   created() {
     // check if game is done
@@ -45,11 +50,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/base.scss";
+
 p {
   display: none;
   &.show {
     display: block;
   }
 }
-</style>
 
+.board-container {
+  position: relative;
+}
+</style>

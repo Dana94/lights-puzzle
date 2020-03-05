@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <h1 class="display-1 mb-3">Choose a Level</h1>
-    <v-btn class="level1" @click="level = 1">Level 1</v-btn>
-    <v-btn class="level2" @click="level = 2">Level 2</v-btn>
-    <v-btn class="level3" @click="level = 3">Level 3</v-btn>
-  </div>
+  <v-layout align-center column>
+    <div>
+      <h1 class="display-1 mb-3">Choose a Level</h1>
+      <v-btn class="level1" @click="level = 1">Level 1</v-btn>
+      <v-btn class="level2" @click="level = 2">Level 2</v-btn>
+      <v-btn class="level3" @click="level = 3">Level 3</v-btn>
+    </div>
+  </v-layout>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       level: 0
-    }
+    };
   },
   watch: {
-    level () {
-      this.$store.dispatch('setLevel', this.level);
+    level() {
+      this.$store.dispatch("setLevel", this.level);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
