@@ -68,13 +68,15 @@ export default {
 
   // for some reason the stats component button styles aren't displaying when declared in the Stats.vue file
   // that's why they are here instead
-  .stats {
-    position: absolute;
-    right: -9rem;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-
+  @media(min-width: 768px) {
+    .stats {
+      position: absolute;
+      right: -9rem;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
     .reset {
       background-color: $purple;
       color: $white;
@@ -84,6 +86,5 @@ export default {
       background-color: $blue;
       color: $white;
     }
-  }
 }
 </style>
