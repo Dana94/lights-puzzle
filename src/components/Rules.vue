@@ -11,8 +11,8 @@
           </template>
           <v-card>
             <v-card-text>
-              Get all the squares to light up! Clicking on one square will turn
-              it on/off as well as any square sharing a side with it.
+              Get all the grid areas to light up! Clicking on one area will turn
+              it on/off as well as any area sharing a side with it.
               <br />
               Good luck. :)
             </v-card-text>
