@@ -29,18 +29,37 @@ export default {
 <style lang="scss" scoped>
 .row {
   display: grid;
-  grid-template-rows: 100px;
   margin-bottom: 10px;
-  grid-gap: 10px;
+  grid-gap: 5px;
 
   &.rowLevel1 {
+    grid-template-rows: 100px;
     grid-template-columns: repeat(3, 100px);
   }
   &.rowLevel2 {
-    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: 65px;
+    grid-template-columns: repeat(5, 65px);
   }
   &.rowLevel3 {
-    grid-template-columns: repeat(7, 100px);
+    grid-template-rows: 45px;
+    grid-template-columns: repeat(7, 45px);
+  }
+}
+
+@media (min-width: 768px) {
+  .row {
+    display: grid;
+    margin-bottom: 10px;
+    grid-gap: 10px;
+
+    &.rowLevel2 {
+      grid-template-rows: 90px;
+      grid-template-columns: repeat(5, 90px);
+    }
+    &.rowLevel3 {
+      grid-template-rows: 65px;
+      grid-template-columns: repeat(7, 65px);
+    }
   }
 }
 </style>

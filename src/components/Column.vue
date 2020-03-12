@@ -74,7 +74,7 @@ export default {
 @import "../assets/base.scss";
 
 .column {
-  border-radius: 25px;
+  border-radius: 50%;
   &.on {
     background-color: $lightGreen;
   }
@@ -84,6 +84,12 @@ export default {
   &:focus {
     outline: none;
     border: 5px solid $pink;
+  }
+}
+
+@media (min-width: 768px) {
+  .column {
+    border-radius: 25px;
   }
 }
 </style>
